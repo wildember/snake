@@ -4,6 +4,7 @@ void reset()
       highScore = score;
     }
     score = 0;
+    level = 1;
     currentDirection = RIGHT;
     foodLocation = null;
     bodyParts = new ArrayList<PVector>();

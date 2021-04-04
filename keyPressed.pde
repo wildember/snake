@@ -1,5 +1,6 @@
 void keyPressed() {
-  if (key == CODED && keyCode != currentDirection && !isCounterDirection(keyCode)) {
+  if (key == CODED && keyCode != currentDirection && !isCounterDirection(keyCode) && !hasMoved) {
+    hasMoved = true;
     currentDirection = keyCode;
   }
   if (key == 32) {

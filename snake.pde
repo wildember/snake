@@ -4,11 +4,15 @@ int currentDirection = RIGHT;
 int score = 0;
 int highScore = 0;
 int speed = 10;
+int level = 1;
 ArrayList<PVector> bodyParts;
+ArrayList<ArrayList<PVector>> walls;
+ArrayList<PVector> currentLevelWalls;
 PFont optimusPrinceps;
 PFont arial;
 boolean foodIsShown = false;
 boolean isDead = false;
+boolean hasMoved = false;
 boolean gotOuroboros = false;
 boolean hasOuroboros = false;
 
@@ -21,6 +25,11 @@ void setup()
   textFont(arial);
   
   bodyParts = new ArrayList<PVector>();
+  walls = new ArrayList<ArrayList<PVector>>();
+  for(int i = 0; i <= 3; i++) {
+    walls.add(loadLevel(i));
+  }
+  currentLevelWalls = walls.get(0);
   headLocation = new PVector(width/2, height/2);
   bodyParts.add(headLocation);
 }
@@ -31,15 +40,8 @@ void draw()
     background(255);
     stroke(0);
     rect(0, 50, 500, 500);
-    textSize(12);
-    textAlign(LEFT);
-    fill(0);
-    text("Current score: " + score, 10, 10, 500, 20);
-    text("High score: " + highScore, 10, 30, 500, 50);
-    textAlign(RIGHT);
-    fill(50);
-    text("Stirring: arrows", -10, 10, 500, 20);
-    text("Speed up: space", -10, 30, 500, 20);
+    loadTopTexts();
+    loadLevelWalls();
     
     if (isDead) {
       showDeath();
@@ -47,7 +49,10 @@ void draw()
     }
     
     frameRate(5 + floor(score/5));
+    level = floor(score/10) + 1;
+    currentLevelWalls = loadLevel(floor(score/10));
     
+    hasMoved = false;
     drawBody();
     spawnFood();
     

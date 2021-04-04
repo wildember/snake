@@ -1,7 +1,9 @@
 boolean checkCollisions()
 {
-  if (headLocation.x < 0 || headLocation.x > 490 || headLocation.y < 50 || headLocation.y > 490) {
-    return true;
+  for(int i = 1; i < currentLevelWalls.size(); i++) {
+    if (headLocation.x == currentLevelWalls.get(i).x && headLocation.y == currentLevelWalls.get(i).y) {
+      return true;
+    }
   }
   
   if (bodyParts.size() < 5) {

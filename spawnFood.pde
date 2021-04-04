@@ -2,7 +2,7 @@ void spawnFood()
 {
   if (foodLocation == null) {
     PVector location = generateLocation();
-    while (isWithinBody(location)) {
+    while (isWithinBody(location) || isWithinWall(location)) {
       location = generateLocation();
     }
     foodLocation = location;
@@ -25,6 +25,17 @@ boolean isWithinBody(PVector location)
 {
   for(int i = 0; i < bodyParts.size(); i++) {
     if (bodyParts.get(i).x == location.x && bodyParts.get(i).y == location.y) {
+      return true;
+    }
+  }
+  
+  return false;
+}
+
+boolean isWithinWall(PVector location)
+{
+  for(int i = 0; i < currentLevelWalls.size(); i++) {
+    if (currentLevelWalls.get(i).x == location.x && currentLevelWalls.get(i).y == location.y) {
       return true;
     }
   }

@@ -17,16 +17,32 @@ void move(int direction)
   
   switch(direction) {
     case UP:
-      headLocation.y -= speed;
+      if (headLocation.y == 50) {
+        headLocation.y = 500 - speed;
+      } else {
+        headLocation.y -= speed;
+      }
       break;
     case DOWN:
-      headLocation.y += speed;
+      if (headLocation.y == 490) {
+        headLocation.y = 40 + speed;
+      } else {
+        headLocation.y += speed;
+      }
       break;
     case RIGHT:
-      headLocation.x += speed;
+      if (headLocation.x == 490) {
+        headLocation.x = -10 + speed;
+      } else {
+        headLocation.x += speed;
+      }
       break;
     case LEFT:
-      headLocation.x -= speed;
+      if (headLocation.x == 0) {
+        headLocation.x = 500 - speed;
+      } else {
+        headLocation.x -= speed;
+      }
       break;
   }
   
